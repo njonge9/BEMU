@@ -1,7 +1,6 @@
 require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  skip_authentication only: [:new, :create]
   setup do
     @user = users(:jerry)
   end
