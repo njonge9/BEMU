@@ -8,6 +8,17 @@ module Authenticate
         helper_method :logged_in?
     end
 
+    class_methods do
+        def skip_authentication(**options)
+            skip_before_action :authenticate, options
+            skip_before_action :require_login, options
+        end
+
+        def allow_unauthenticated(**options)
+            skip_before_action :require_login, options  
+        end
+    end
+
     protected
 
     def logged_in?
