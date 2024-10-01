@@ -12,6 +12,12 @@ class User < ApplicationRecord
 
     has_many :app_sessions
 
+    def self.create_app_session(email:, password:)
+        return nil unless user = User.find_by(email: email.downcase)
+        
+        user.app_sessions.create if user.authenticate(password)
+    end
+
     private
 
     def strip_extra_spaces
