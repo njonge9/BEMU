@@ -10,6 +10,8 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, presence: true, length: { minimum: 8 }
 
+    has_many :app_sessions
+
     private
 
     def strip_extra_spaces
