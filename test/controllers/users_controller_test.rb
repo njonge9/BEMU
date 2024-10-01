@@ -1,6 +1,7 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  skip_authentication only: [:new, :create]
   test "redirects to feed after sucessful sign up" do
     get sign_up_path
     assert_response :ok
@@ -17,7 +18,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_path
     assert_not_empty cookies[:app_session]
-    
+
     follow_redirect!
     assert_select ".notification.is-sucess",
       text: I18n.t("users.create.welcome", name: "John")
